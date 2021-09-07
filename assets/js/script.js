@@ -19,10 +19,12 @@ for (i = 0 ; i < 9; i++){
     var save_col = $("<button type=button class='btn btn-primary task-save'>");
     var sch_end = $("<div class='input-group-append'>");
     var col_id = "column_" + i;
-    var sav_id = "save_" + i;
+    var sav_id =  i;
+    var mem_id = "mem_" + i;
     act_col.attr("id", col_id);
     save_col.attr("id", sav_id);
     date_col.text(hour);
+    act_col.val(localStorage.getItem(mem_id));
     sch_pre.append(date_col);
     sch_end.append(save_col);
     save_col.text("Save");
@@ -33,15 +35,15 @@ for (i = 0 ; i < 9; i++){
     main.append(row);
 };
 
-//Current Code KIND of works in created the list of times, need to add changable text area, delete/edit function, and
-//"current hour" highlighting (Which I think will just be a "if the time is X, change the class to Y")
-
 //Save Task Logic
 $(".task-save").click(function(){
-    console.log(this.id)
-})
+    var col_match = "#column_"+ this.id;
+    var mem_stor = "mem_" + this.id;
+    task = $(col_match).val();
+    console.log(task);
+    localStorage.setItem(mem_stor,task);
 
-//Click Listener for the save button pulls info from act_col and saves it (span content)
+});
 
 
 //If statement to highlight current hour
